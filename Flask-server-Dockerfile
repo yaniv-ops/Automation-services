@@ -1,0 +1,31 @@
+FROM python:3
+
+WORKDIR /usr/src/app
+
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+CMD [ "python", "./your-daemon-or-script.py" ]
+
+# beneath is a use case cut out of script after configuration file
+
+///*
+
+
+FROM python:alpine 
+
+LABEL maintainer="Flask server"
+
+RUN pip install flask
+
+COPY src /src/
+
+EXPOSE 5000
+
+ENTRYPOINT ["python", "/src/app.py"]
+
+
+
+*\\\
